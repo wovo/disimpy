@@ -2,21 +2,18 @@
 """     
 
 import inspect
-import disimpy_base     as base
+import disimpy_base as base
 
-class circuit:
-   """a digital circuit 
+class _circuit_class:
+   """implementation of a digital circuit 
    """
    
-   def __init__( self, lib, name ):
-      self.lib = lib
-      if inspect.isclass( lib ):
-         self.lib = lib()
+   def __init__( self, name ):
       self.name = name[ : ]
       self.inputs = {}
       self.outputs = {}
       
-   def input( self, name ):
+   def add_input( self, name ):
       r = base.input( name )
       if name in self.inputs:
          raise "duplicate input name [%s]" % name
@@ -25,7 +22,7 @@ class circuit:
       self.inputs[ name ] = r
       return r      
 
-   def output( self, source, name ):   
+   def add_output( self, source, name ):   
       r = base.output( source, name )
       if name in self.outputs:
          raise "duplicate output name [%s]" % name
@@ -57,9 +54,25 @@ class circuit:
          s += "\ncircuit name    : %s" % self.name
       s += "\ncircuit inputs  : %d" % len( self.inputs )
       s += "\ncircuit outputs : %d" % len( self.outputs )
-      s += "\nusage"
-      s += self.lib.statistics().replace( "\n", "\n   " )
       return s
+
       
-   def __getattr__( self, item ):
-      return getattr( self.lib, item )
+def circuit( *kwargs ):
+   caller = inspect.currentframe().f_back
+   result = _circuit_class( caller.f_code.co_name )
+   
+   for n in range( 0, caller.f_code.co_argcount ):
+      name = caller.f_code.co_varnames[ n ]
+      if name != "self":
+         print( "in", name )
+   
+   for arg in kwargs:
+      print( "out", arg )
+      
+   print( "====" )
+   print( caller.f_lineno )
+   print( caller.f_locals )
+   print( caller.f_code.co_name )
+   print( caller.f_code.co_names )
+   print( caller.f_code.co_varnames )
+   print( caller.f_code.co_argcount )
