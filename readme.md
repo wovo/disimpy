@@ -4,6 +4,7 @@ definition language and simulator in Python.
 For now, it is just a dump for my ideas.
 
 Todo & wish list:
+- een circuit is of 1-output, of named outputs (1 outputb heeft ook named outputs 'output'? )
 - een gate is circuit en ook een output
 - truth-table werkt op een circuit door de parameters te inspecteren
 - each gate should be a circuit too

@@ -3,6 +3,14 @@
 
 import disimpy_base as base
 
+class g_not( base.node ):      
+
+   def __init__( self, input ):
+      self.input = input
+
+   def value( self ) -> bool:
+      return not self.input[ 0 ].value()
+
 class g_and( base.node ):      
 
    def __init__( self, inputs ):
@@ -31,7 +39,7 @@ class g_or( base.node ):
       self.inputs = inputs[ : ]
 
    def value( self ) -> bool:
-      r = True
+      r = False
       for x in self.inputs:
          r = r or x.value()
       return r
@@ -42,7 +50,7 @@ class g_nor( base.node ):
       self.inputs = inputs[ : ]
 
    def value( self ) -> bool:
-      r = True
+      r = False
       for x in self.inputs:
          r = r or x.value()
       return not r

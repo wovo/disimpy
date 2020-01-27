@@ -43,6 +43,9 @@ class gates( base.toolkit ):
       self.add( "input", len( inputs ) )
       return basic( inputs )
       
+   def f_not( self, *inputs ):
+      return self._make( "not", inputs, basic_gates.g_not )
+      
    def f_nand( self, *inputs ):
       return self._make( "nand", inputs, basic_gates.g_nand )
       

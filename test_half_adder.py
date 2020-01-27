@@ -13,7 +13,7 @@ def xhalf_adder( lib ):
    c.output( carry, "carry" ) 
    return c   
    
-lib = ds.libs.gates 
+lib = ds.libs.gates() 
    
 def half_adder( a, b ):
    return ds.circuit( 
@@ -21,47 +21,27 @@ def half_adder( a, b ):
      carry = lib.f_and( a, b ) 
    )   
       
-def full_adder( a, b, cin ):
-   one = half_adder( a, b )
-   two = half_adder( a.sum, cin )
+def full_adder( ax, b, cin ):
+   one = half_adder( ax, b )
+   two = half_adder( one.sum, cin )
    return ds.circuit(
       sum = two.sum,
-      carry = lib.f_or( one.sum, two.sum )
+      carry = lib.f_or( one.carry, two.carry )
+   )
+   
+def selector( s, a, b ):
+   sa = lib.f_and( s, a )
+   sb = lib.f_and( lib.f_not( s ), b )
+   return ds.circuit(
+      result = lib.f_or( sa, sb )
    )   
    
-x = half_adder( 0, 0 )   
+a = ds.input( "a" )
+b = ds.input( "b" )
+x = half_adder( a, b )
 
-#print( c.truth_table() )
-#print( c.statistics() )
+print( ds.truth_table( selector ) )
 
-import inspect
-
-def g():
-   caller = inspect.currentframe().f_back
-   print( "g" )
-   print( caller.f_lineno )
-   print( caller.f_locals )
-   print( caller.f_code.co_name )
-   print( caller.f_code.co_names )
-   print( caller.f_code.co_varnames )
-   print( caller.f_code.co_argcount )
-   
-class bla:
-   def __init__( self, x ):
-      self.x = x   
-      #g()
-      
-   def f( self, a, b = 5 ):
-      g()   
-   
-def f( f, b, c = 5, d = 9 ):
-   e = 9
-   g()
-
-#f( 1, 2, 3 )
-#x = bla( 5 )
-#x.f( 7 )
-
- 
+                    
       
       

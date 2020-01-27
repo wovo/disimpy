@@ -55,24 +55,63 @@ class _circuit_class:
       s += "\ncircuit inputs  : %d" % len( self.inputs )
       s += "\ncircuit outputs : %d" % len( self.outputs )
       return s
-
       
-def circuit( *kwargs ):
-   caller = inspect.currentframe().f_back
-   result = _circuit_class( caller.f_code.co_name )
+class circuit:
+   def __init__( self, *args, **kwargs ):
+      if len( args ) != 0:
+         raise "circuit must have only keyword arguments"
    
-   for n in range( 0, caller.f_code.co_argcount ):
-      name = caller.f_code.co_varnames[ n ]
-      if name != "self":
-         print( "in", name )
-   
-   for arg in kwargs:
-      print( "out", arg )
+      self._outputs = {}   
+      for arg in kwargs:
+         setattr( self, arg, kwargs[ arg ] )
+         self._outputs[ arg ] = kwargs[ arg ]
+         
+import inspect         
+         
+def truth_table( c ):
+   if not inspect.isfunction( c ):
+      raise "truth_table() must be called with a function"
       
-   print( "====" )
-   print( caller.f_lineno )
-   print( caller.f_locals )
-   print( caller.f_code.co_name )
-   print( caller.f_code.co_names )
-   print( caller.f_code.co_varnames )
-   print( caller.f_code.co_argcount )
+   # create the list of input variables   
+   sig = str( inspect.signature( c ))
+   sig = sig.replace( "(", "" ).replace( ")", "" ).split( "," )
+   inputs = []
+   for arg in sig:
+      arg = arg.split( "=" )[ 0 ].strip()
+      inputs.append( arg )
+      
+   s = ""
+   # for all input values
+   for v in range( 0, 2 ** len( inputs ), 1 ):
+      args = []
+      s1 = ""
+      
+      # create the list of input literals
+      for x in inputs:
+         b = ( v & ( 1 << len( inputs ) - 1 )) != 0
+         args.append( base.literal( b ))
+         s1 += "1" if b else "0"
+         s1 += " " * len( x )
+         v = 2 * v
+         
+      # call the function with the input literals as arguments   
+      result = c( *args )   
+      
+      # first input value?
+      if not "\n" in s:
+         # create the header
+         for x in inputs:
+            s += "%s " % x
+         for x in result._outputs:
+            s += "%s " % x
+            
+      # add the input values      
+      s += "\n" + s1
+      
+      # add the output values
+      for x in result._outputs:
+         s += "1" if result._outputs[ x ].value() else "0"
+         s += " " * len( x )
+         
+   return s         
+      

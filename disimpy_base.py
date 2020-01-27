@@ -12,6 +12,18 @@ class node:
       pass   
       
       
+class literal( node ):
+   """an literal has a fixed value
+   """
+   
+   def __init__( self, v : bool ):
+      self.name = ""
+      self.v = v
+      
+   def value( self ):
+      return self.v   
+      
+      
 class input( node ):
    """an input gets its value from outside
    """
