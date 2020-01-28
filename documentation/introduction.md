@@ -1,4 +1,4 @@
-disimpy introduction
+# disimpy introduction
 
 disimpy is a Python library for the definition
 and simulation of digital circuits.
@@ -9,7 +9,7 @@ and simulation of digital circuits.
 
 <a name="toc-anchor-0"></a>
 
-# 1 Content
+## 1 Content
 
 <!-- update table_of_contents( input, 2 ) -->
 
@@ -29,7 +29,7 @@ and simulation of digital circuits.
 
 <a name="toc-anchor-1"></a>
 
-# 2 Combinatorial circuits
+## 2 Combinatorial circuits
 
 A circuit is created by a function that takes
 the inputs as parameters, and returns the output(s).
@@ -189,7 +189,7 @@ def full_adder( a, b, c ):
 
 <a name="toc-anchor-2"></a>
 
-# 3 Built-in operators and functions
+## 3 Built-in operators and functions
        
 The disimpy built-in logical operators work for single wires only.
 
@@ -219,7 +219,7 @@ For an xor with more than two inputs the 'odd parity' definition is used.
 
 <a name="toc-anchor-3"></a>
 
-# 4 Circuits with feedback
+## 4 Circuits with feedback
 
 A combinatorial circuit can defined from just logical gates.
 For a circuit that has feedback the feedback connections
