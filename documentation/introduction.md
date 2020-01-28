@@ -17,9 +17,13 @@ and simulation of digital circuits.
 
   - [Disimpy introduction](#toc-anchor-0)
 
-    - [1. Combinatorial circuits](#toc-anchor-1)
+    - [1. Simple combinatorial circuits](#toc-anchor-1)
 
-    - [2. Built-in operators and functions](#toc-anchor-2)
+    - [2. Named inputs and outputs: busses](#toc-anchor-2)
+
+    - [3. Multi-wire inputs and outputs](#toc-anchor-3)
+
+    - [4. Built-in logic operators and functions](#toc-anchor-4)
 
 <!-- update end -->
 
@@ -29,7 +33,7 @@ and simulation of digital circuits.
 
 <a name="toc-anchor-1"></a>
 
-## 1. Combinatorial circuits
+## 1. Simple combinatorial circuits
 
 In dimspy a circuit is created by a function that takes the inputs
 of the circuit as parameters, and returns the output(s) of the circuit.
@@ -81,8 +85,80 @@ print( disimpy.truth_table( my_nand_gate ))
 ~~~
 <<>>
 
+The xor is available as a basic gate, 
+but it could be defined as the classic xor-from-nands,
+using the my_nand_gate() circuit function as building block.
+
+<!-- update quote( input, "", "''my_xor_gate 1''" ) -->
+~~~Python
+def my_xor_gate( a, b ):
+    return my_nand_gate( 
+        my_nand_gate( a, my_nand_gate( a, b ) )
+        my_nand_gate( b, my_nand_gate( a, b ) )
+    )    
+~~~
+
+This uses five calls to my_nands_gate(),
+because the expression my_nand_gate( a, b ) is used twice.
+To prevent this, a local variable can be used 
+to re-use the output of the sub-circuit my_nand_gate( a, b ).
+
+<!-- update quote( input, "", "''my_xor_gate 2''" ) -->
+~~~Python
+def my_xor_gate( a, b ):
+    nand_ab = my_nand_gate( a, b )
+    return my_nand_gate( 
+       my_nand_gate( a, nand_ab )
+       my_nand_gate( b, nand_ab )
+    )        
+~~~	
+    
+
+*****************************************************************************
+
+<a name="toc-anchor-2"></a>
+
+## 2. Named inputs and outputs: busses
+
+A circuit that has named outputs is called a bus. 
+It is created by a call to the bus function.
+The outputs are available as attributes of the bus.
+
+This half-adder() circuit function has two input wires, 
+and two named outputs *sum* and *carry*.
+
+<!-- update quote( input, "", "''half_adder''" ) -->
+~~~Python
+def half_adder( a, b ):
+    return disimpy.bus(
+       sum = a ^ b
+       carry = a & b 
+    )
+~~~	
+
+This full_adder() circuit uses two half-adders to create a full adder. 
+It has three equivalent inputs (it doesn't matter which is used
+as normal input or carry), and two named outputs *sum* and *carry*.
+
+<!-- update quote( input, "", "''full_adder''" ) -->
+~~~Python   
+def full_adder( a, b, c ):
+    ab = half_adder( a, b )
+    abc = half_adder( ab.sum, c )
+    return disimpy.bus(
+        sum = abc.sum, 
+        carry = ab.carry | abc.carry 
+    )    
+~~~
+
+*****************************************************************************
+
+<a name="toc-anchor-3"></a>
+
+## 3. Multi-wire inputs and outputs
+
 A circuit function can accept multiple input wires
-as a Python sequence. 
+as a Python sequence.
 
 This my_nor_gate() circuit function uses reduce() to apply 
 the or operator | to all elements of the sequence, 
@@ -119,34 +195,6 @@ print( disimpy.truth_table( my_nor_circuit ))
 A circuit function can be used as a building block 
 for functions that create more complex circuits. 
 
-The xor is available as a basic gate, 
-but it could be defined as the classic xor-from-nands,
-using the my_nand_gate() circuit function as building block.
-
-<!-- update quote( input, "", "''my_xor_gate 1''" ) -->
-~~~Python
-def my_xor_gate( a, b ):
-    return my_nand_gate( 
-        my_nand_gate( a, my_nand_gate( a, b ) )
-        my_nand_gate( b, my_nand_gate( a, b ) )
-    )    
-~~~
-
-This uses five calls to my_nands_gate(),
-because the expression my_nand_gate( a, b ) is used twice.
-To prevent this, a local variable can be used 
-to re-use the output of the sub-circuit my_nand_gate( a, b ).
-
-<!-- update quote( input, "", "''my_xor_gate 2''" ) -->
-~~~Python
-def my_xor_gate( a, b ):
-    nand_ab = my_nand_gate( a, b )
-    return my_nand_gate( 
-       my_nand_gate( a, nand_ab )
-       my_nand_gate( b, nand_ab )
-    )        
-~~~	
-    
 It can be useful to combine a single wire
 with each of the wires in a sequence.
 
@@ -173,51 +221,21 @@ def my_xor_for_two_ports( a, b ):
     return [ x ^ y for x, y in zip( a, b ) ]
 ~~~
 
-A circuit that has named outputs is called a bus. 
-It is created by a call to the bus function.
-The outputs are available as attributes of the bus.
-
-This half-adder() circuit function  has two input wires, 
-and two named outputs *sum* and *carry*.
-
-<!-- update quote( input, "", "''half_adder''" ) -->
-~~~Python
-def half_adder( a, b ):
-    return disimpy.bus(
-       sum = a ^ b
-       carry = a & b 
-    )
-~~~	
-
-This full_adder() circuit uses two half-adders to create a full adder. 
-It has three equivalent inputs (it doesn't matter which is used
-as normal input or carry), and two named outputs *sum* and *carry*.
-
-<!-- update quote( input, "", "''full_adder''" ) -->
-~~~Python   
-def full_adder( a, b, c ):
-    ab = half_adder( a, b )
-    abc = half_adder( ab.sum, c )
-    return disimpy.bus(
-        sum = abc.sum, 
-        carry = ab.carry | abc.carry 
-    )    
-~~~
-
 *****************************************************************************
 
-<a name="toc-anchor-2"></a>
+<a name="toc-anchor-4"></a>
 
-## 2. Built-in operators and functions
+## 4. Built-in logic operators and functions
        
 The disimpy built-in logical operators (&,|,^,~) 
-work for single wires only, and have only the 'true output' form 
+work (only) on single wires, and have only the 'true output' form 
 (| is *or*, if *nor* must be created from ~ and |).
 
-The disimpy basic logic functions are available in true and inverted
-versions, and more flexible in the inputs that are accepted.
+The full set of basic logic gates is available as disimpy functions,
+both with true and inverted outputs, 
+and more flexible in the inputs that are accepted than the operators.
 
-The disimpy and, nand, or, nor, xor and xnor functions
+The disimpy *and*, *nand*, *or*, *nor*, *xor* and *xnor* functions
 can operate on:
    - two wires, returning a wire
    - one sequence of wires, returning a wire
@@ -227,16 +245,14 @@ can operate on:
    - two busses with the same attributes, 
         returning a bus with those same attributes
 		
-The not function can operate on
+The *not* function can operate on
    - a single wire, returning a single wire
    - a sequence of wires,
      returning a sequence of wires of that same length
    - a bus, returning a bus with the same attributes
    
-For an xor with more than two inputs the 'odd parity' definition is used.
+For an *xor* or *xnor* with more than two inputs the 
+'odd parity' definition is used.
 (The alternative that is sometimes used is the 'exactly one' definition.)
 
-- truth_table()
-- circuit()
-- bus()
 
