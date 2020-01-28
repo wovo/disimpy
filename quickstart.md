@@ -8,12 +8,13 @@ operating on single wire.
 combinatorial circuits
 
 A circuit is created by a function that takes
-the inputs as parameters, and returns the output.
-Such a circuit function does not *calculate* the output,
+the inputs as parameters, and returns the output(s).
+Such a *circuit function* does not *calculate* the output,
 instead it creates a *circuit* that can calculate the output.
 
 In this example the circuit consists of two
-basic gates, an *and* and a *not*, and it calculates the *nand* function.
+basic gates, an *and* and a *not*, and 
+the circuit calculates the *nand* function.
 
 def my_nand_gate( a, b ):
     return ~ ( a & b )
@@ -219,3 +220,73 @@ Library design sequence:
 - write implementation
 - try it to write code
 - document it
+
+def ripple_adder( port1, port2, cin ):
+   result = []
+   for a, b in zip( port1, port2 ):
+      stage = full_adder( a, b, cin )
+      result.append( stage.sum )
+      cin = stage.carry
+   return bus( sum = result, carry = cin )   
+   
+def equal( port1, port2 );
+   return nand( xor( port1, port2 ))
+   
+def larger( port1, port2 ):
+   result = []
+   for a, b in reverse( zip( port1, port2 )):
+         
+
+def decode( port, n = None, port_ = None ):
+    """decoder
+    
+    This circuit function can be used in two ways:
+    
+       decode( port ) 
+       
+       decodes the port into a port of 2 \** len( port )
+       lines, of which at any time only the n-th line is 1
+       (the others are 0), where n is the binary value
+       of the input port
+       
+       decode( port, n )
+       
+       decodes the port into a single wire, which is 1 if
+       and only if the binary value of the port is n.
+       
+       decode( port, n, _port )
+       
+       _port must be the bitwise ~ of port. 
+       decodes the port into a single wire like decode( port, n ),
+       but uses less gates because the inverse of the port bits
+       is supplied by the caller.
+    """
+    
+    if n == None:
+        if port_ == None:
+           return decode( port, n, ~ port_ )
+        else:   
+           return [ 
+              decode( bus, n, bus_ ) 
+                 for n in range( 0, 2 ** len( bus )) ]
+    else:    
+        return and( [
+           port[ i ] if ( n & 1 << i ) else port_[ i ]
+              for i in range( 0, len( bus ) ] )
+ 
+def ram( a 
+ for x in decode( address ) 
+ 
+def sr( set, reset ):
+   return bus( q =, q_ = )
+
+def latch( enable, data ):
+   return sr( 
+      set = enable & data,
+      reset = enable & ~ data
+   )   
+   
+def register( clock, data ):
+   return latch( 
+      clock = ~ clock, 
+      data = latch( clock, data ).q )
