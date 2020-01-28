@@ -140,7 +140,7 @@ def update( file_name ):
          while line.startswith( "#" ):
             d = d + 1
             line = line[ 1 : ]
-         num = num_add( num, d )			
+         num = num_add( num, d )
          while ( line + ' ' )[ 0 ] in "1234567890. ":
             line = line[ 1 : ]
          line = line.replace( "\n", "" ).strip()
@@ -161,7 +161,7 @@ def update( file_name ):
       
       else:
          result.append( line )
-		 
+
    # write output to the same file
    with open( file_name, "w" ) as f:
       for line in result:
