@@ -3,6 +3,8 @@ disimpy introduction
 disimpy is a Python library for the definition
 and simulation of digital circuits.
 
+[pdf version](https://gitprint.com/wovo/disimpy/blob/master/introduction.md)
+
 *****************************************************************************
 
 <a name="toc-anchor-0"></a>
