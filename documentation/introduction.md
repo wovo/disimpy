@@ -13,7 +13,11 @@ and simulation of digital circuits.
 
   - [1 Content](#toc-anchor-0)
 
-  - [2 combinatorial circuits](#toc-anchor-1)
+  - [2 Combinatorial circuits](#toc-anchor-1)
+
+  - [3 Built-in operators and functions](#toc-anchor-2)
+
+  - [4 Circuits with feedback](#toc-anchor-3)
 
 <!-- update end -->
 
@@ -23,7 +27,7 @@ and simulation of digital circuits.
 
 <a name="toc-anchor-1"></a>
 
-# 2 combinatorial circuits
+# 2 Combinatorial circuits
 
 A circuit is created by a function that takes
 the inputs as parameters, and returns the output(s).
@@ -162,8 +166,12 @@ def full_adder( a, b, c ):
        carry = ab.carry | abc.carry 
    )    
 ~~~
-   
-built-in operators and functions   
+
+*****************************************************************************
+
+<a name="toc-anchor-2"></a>
+
+# 3 Built-in operators and functions
        
 The disimpy built-in logical operators work for single wires only.
 
@@ -189,7 +197,11 @@ For an xor with more than two inputs the 'odd parity' definition is used.
 - circuit()
 - bus()
 
-circuits with feedback
+*****************************************************************************
+
+<a name="toc-anchor-3"></a>
+
+# 4 Circuits with feedback
 
 A combinatorial circuit can defined from just logical gates.
 For a circuit that has feedback the feedback connections
