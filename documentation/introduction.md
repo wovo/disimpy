@@ -1,25 +1,26 @@
-# disimpy introduction
+<a name="toc-anchor-0"></a>
 
-disimpy is a Python library for the definition
+# 1 disimpy introduction
+
+Disimpy is a Python library for the definition
 and simulation of digital circuits.
 
 [pdf version](https://gitprint.com/wovo/blob/master/disimpy/documentation/introduction.md)
 
 *****************************************************************************
 
-<a name="toc-anchor-0"></a>
+<a name="toc-anchor-1"></a>
 
-## 1 Content
+## 1.1 Content
 
 <!-- update table_of_contents( input, 2 ) -->
 
-  - [1 Content](#toc-anchor-0)
+  - [1 disimpy introduction](#toc-anchor-0)
 
-  - [2 Combinatorial circuits](#toc-anchor-1)
-
-  - [3 Built-in operators and functions](#toc-anchor-2)
-
-  - [4 Circuits with feedback](#toc-anchor-3)
+    - [1.1 Content](#toc-anchor-1)
+      [1.2 Combinatorial circuits](#toc-anchor-2)
+      [1.3 Built-in operators and functions](#toc-anchor-3)
+      [1.4 Circuits with feedback](#toc-anchor-4)
 
 <!-- update end -->
 
@@ -27,18 +28,18 @@ and simulation of digital circuits.
 
 *****************************************************************************
 
-<a name="toc-anchor-1"></a>
+<a name="toc-anchor-2"></a>
 
-## 2 Combinatorial circuits
+## 1.2 Combinatorial circuits
 
-A circuit is created by a function that takes
-the inputs as parameters, and returns the output(s).
+In dimspy a circuit is created by a function that takes the inputs
+of the circuit as parameters, and returns the output(s) of the circuit.
 Such a *circuit function* does not *calculate* the output,
 instead it *creates (and returns) a circuit* that can calculate the output.
 
 Circuit functions for the basic gates (or, and, xor, not) are available 
 as overloads of the bitwise logic operators (&,|,^,~).
-These functions operate on a single wire.
+These functions operate on a single wires.
 
 In this my_nand_gate function the created a circuit consists of two
 basic gates, an *and* and a *not*, and 
@@ -54,6 +55,8 @@ To test a circuit function, it must first be used to create a circuit.
 For the my_nand_gate function this creates a circuit that has two 
 inputs named a and b, and a single output.
 You can assign values to the inputs, and retrieve the result.
+Inputs can be set by assigning to the attributes, or
+by calling the set method with keyword parameters.
 
 <!-- update quote( input, "", "''my_nand_gate test''" ) -->
 ~~~Python
@@ -62,9 +65,10 @@ my_nand_circuit = disimpy.circuit( my_nand_gate )
 my_nand_circuit.a, my_nand_circuit.b = 0, 1
 print( "nand( 0, 1 ) =>", c.value() )
 
-my_nand_circuit.a, my_nand_circuit.b = 1, 1
+my_nand_circuit.set( a = 1, b = 1 )
 print( "nand( 1, 1 ) =>", c.value() )
 ~~~
+<<>>
 
 The function truth_table() returns a table that shows the output(s)
 of a circuit function for all possible inputs.
@@ -81,19 +85,20 @@ can get its inputs as a sequence.
 This my_nor_gate example circuit function is realized by using reduce() to apply 
 the or operator | to all elements of the list, 
 and applying the not operator ~ to the result.
-A lanmbda is used to create a function from the | operator.
+Reduce requires a function (not an operator) as its first parameter, so 
+a lambda is used to create a function from the | operator.
 
 <!-- update quote( input, "", "''my_nor_gate''" ) -->
 ~~~Python
 def my_nor_gate( port ):
     return ~ reduce( lambda a, b : a | b, port )
-def my_nor_gate( port ):
-    return ~ reduce( lambda a, b : a | b, port )
 ~~~	
    
-When such a function is used to create a circuit,
-or to call truth_table, the number 
+When such a function is used to create a circuit
+or to in a call to truth_table, the number 
 of inputs in the input port must be specified. 
+This can be done via a keyword parameter to the circuit function
+with the same name as the port.
 The truth_table function can also be called with a circuit
 (instead of a circuit function).
 
@@ -105,19 +110,14 @@ my_nor_circuit = disimpy.circuit(
 )    
 print( disimpy.truth_table( my_nor ), inputs = 3 )
 print( disimpy.truth_table( my_nor_circuit ))
-my_nor_circuit = disimpy.circuit( 
-    my_nor, 
-    inputs = 3
-)    
-print( disimpy.truth_table( my_nor ), inputs = 3 )
-print( disimpy.truth_table( my_nor_circuit ))
 ~~~
     
-A circuit function that can be used as a building block 
+A circuit function can be used as a building block 
 for functions that create more complex circuits. 
+
 The xor is available as a basic gate, 
 but it could be defined as the classic xor-from-nands,
-using the my_nand_gate function.
+using the my_nand_gate function as building block.
 
 <!-- update quote( input, "", "''my_xor_gate 1''" ) -->
 ~~~Python
@@ -131,7 +131,7 @@ def my_xor_gate( a, b ):
 This uses five calls to my_nands_gate,
 because the expression my_nand_gate( a, b ) is used twice.
 To prevent this, a local variable can be used 
-to re-use the output of a sub-circuit.
+to re-use the output of the sub-circuit my_nand_gate( a, b ).
 
 <!-- update quote( input, "", "''my_xor_gate 2''" ) -->
 ~~~Python
@@ -187,9 +187,9 @@ def full_adder( a, b, c ):
 
 *****************************************************************************
 
-<a name="toc-anchor-2"></a>
+<a name="toc-anchor-3"></a>
 
-## 3 Built-in operators and functions
+## 1.3 Built-in operators and functions
        
 The disimpy built-in logical operators work for single wires only.
 
@@ -217,9 +217,9 @@ For an xor with more than two inputs the 'odd parity' definition is used.
 
 *****************************************************************************
 
-<a name="toc-anchor-3"></a>
+<a name="toc-anchor-4"></a>
 
-## 4 Circuits with feedback
+## 1.4 Circuits with feedback
 
 A combinatorial circuit can defined from just logical gates.
 For a circuit that has feedback the feedback connections
