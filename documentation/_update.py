@@ -141,11 +141,14 @@ def update( file_name ):
          while line.startswith( "#" ):
             d = d + 1
             line = line[ 1 : ]
-         num = num_add( num, d )
+            
          while ( line + ' ' )[ 0 ] in "1234567890. ":
             line = line[ 1 : ]
          line = line.replace( "\n", "" ).strip()
-         line = num_str( num[:] ) + " " + line
+         
+         if ( d > 1 ) and ( line != "Content" ):
+            num = num_add( num, d - 1 )
+            line = num_str( num[:] ) + " " + line
          if d == toc_one_line:
             c = "-" if num[ -1 ] == 1 else " "
             nl = "\n" if num[ -1 ] == 1 else ""
@@ -153,9 +156,10 @@ def update( file_name ):
               nl + list_entry( d ).replace( "-", c ) 
               + "[%s](#toc-anchor-%d)\n" % ( line , n ))
          else:
-            toc.append( 
-               "\n" + list_entry( d ) 
-               + "[%s](#toc-anchor-%d)\n" % ( line , n ))
+            if line != "Content":
+               toc.append( 
+                  "\n" + list_entry( d ) 
+                  + "[%s](#toc-anchor-%d)\n" % ( line , n ))
          result.append( '<a name="toc-anchor-%d"></a>\n' % n )
          result.append( '\n' )
          result.append( d * "#" + " " + line + "\n" )

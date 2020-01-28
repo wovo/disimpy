@@ -21,10 +21,12 @@ print( disimpy.truth_table( my_nand_gate ))
 def my_nor_gate( port ):
     return ~ reduce( lambda a, b : a | b, port )
     
-# update quote ''my_nor_gate test'' 3
-my_nor_circuit = disimpy.circuit( my_nor, inputs = 3 )    
+# update quote ''my_nor_gate test 1'' 2
+my_nor_circuit = disimpy.circuit( my_nor_gate, inputs = 3 )    
+print( disimpy.truth_table( my_nor_gate, inputs = 3 ))
+
+# update quote ''my_nor_gate test  2'' 1
 print( disimpy.truth_table( my_nor_circuit ))
-print( disimpy.truth_table( my_nor, inputs = 3 ))
 
 # update quote ''my_xor_gate 1'' 5
 def my_xor_gate( a, b ):
