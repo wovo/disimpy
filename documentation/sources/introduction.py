@@ -43,6 +43,28 @@ def my_xor_gate( a, b ):
        my_nand_gate( b, nand_ab )
     )        
     
+# update quote ''my_nand_for_port_and_wire 2'' 2
+def my_nand_for_port_and_wire( a, b ):
+    return [ ~ ( x & b ) for x in a ]    
 
+# update quote ''my_xor_for_two_ports 2'' 2
+def my_xor_for_two_ports( a, b ):
+    return [ x ^ y for x, y in zip( a, b ) ]
+
+# update quote ''half_adder'' 5
+def half_adder( a, b ):
+    return disimpy.bus(
+       sum = a ^ b
+       carry = a & b 
+    )
+
+# update quote ''full_adder'' 7
+def full_adder( a, b, c ):
+    ab = half_adder( a, b )
+    abc = half_adder( ab.sum, c )
+    return disimpy.bus(
+        sum = abc.sum, 
+        carry = ab.carry | abc.carry 
+    )    
 
 

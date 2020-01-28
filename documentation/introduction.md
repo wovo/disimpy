@@ -15,7 +15,7 @@ and simulation of digital circuits.
 
 <!-- update table_of_contents( input, 3 ) -->
 
-  - [Disimpy introduction](#toc-anchor-0) xx
+  - [Disimpy introduction](#toc-anchor-0)
 
     - [1. Combinatorial circuits](#toc-anchor-1)
 
@@ -97,10 +97,10 @@ def my_nor_gate( port ):
 ~~~	
    
 When such a function is used, either to create a circuit
-or in a call to truth_table, the number 
+or in a call to truth_table(), the number 
 of inputs in the port must be specified. 
-This can be done via a keyword parameter to the circuit 
-or truth_table function, with the same name as the port.
+This can be done via a keyword parameter to the circuit() 
+or truth_table() function calls, with the same name as the port.
 
 <!-- update quote( input, "", "''my_nor_gate test 1''" ) -->
 ~~~Python
@@ -121,7 +121,7 @@ for functions that create more complex circuits.
 
 The xor is available as a basic gate, 
 but it could be defined as the classic xor-from-nands,
-using the my_nand_gate function as building block.
+using the my_nand_gate() circuit function as building block.
 
 <!-- update quote( input, "", "''my_xor_gate 1''" ) -->
 ~~~Python
@@ -132,7 +132,7 @@ def my_xor_gate( a, b ):
     )    
 ~~~
 
-This uses five calls to my_nands_gate,
+This uses five calls to my_nands_gate(),
 because the expression my_nand_gate( a, b ) is used twice.
 To prevent this, a local variable can be used 
 to re-use the output of the sub-circuit my_nand_gate( a, b ).
@@ -149,21 +149,25 @@ def my_xor_gate( a, b ):
     
 It can be useful to combine a single wire
 with each of the wires in a sequence.
-This function applies a to each of the wires in b, 
-and returns the results as a sequence.
 
+This my_nand_for_port_and_wire() function uses list comprehension 
+to apply a to each of the wires in b, and return the result as a list.
+
+<!-- update quote( input, "", "''my_nand_for_port_and_wire 2''" ) -->
 ~~~Python
 def my_nand_for_port_and_wire( a, b ):
     return [ ~ ( x & b ) for x in a ]    
 ~~~
 
-Another usefull trick is top apply logic gate to two 
+Another usefull pattern is to apply an logic gate to two 
 same-length sequences of wires, yielding a sequence of the gate outputs 's 
 for pairs of wires from the two input sequences.
 
-This my_xor function compares two (presumably same-length) sequences
-of wires, and produces a list of the xor's of the pairs of wires.
+This my_xor_for_two_ports() function compares two 
+(presumably same-length) sequences of wires, 
+and produces a list of the xor's of the pairs of wires.
 
+<!-- update quote( input, "", "''my_xor_for_two_ports 2''" ) -->
 ~~~Python
 def my_xor_for_two_ports( a, b ):
     return [ x ^ y for x, y in zip( a, b ) ]
@@ -173,14 +177,23 @@ A circuit that has named outputs is called a bus.
 It is created by a call to the bus function.
 The outputs are available as attributes of the bus.
 
+This half-adder() circuit function  has two input wires, 
+and two named outputs *sum* and *carry*.
+
+<!-- update quote( input, "", "''half_adder''" ) -->
 ~~~Python
 def half_adder( a, b ):
-    return sisimpy.bus(
+    return disimpy.bus(
        sum = a ^ b
        carry = a & b 
     )
-~~~
+~~~	
 
+This full_adder() circuit uses two half-adders to create a full adder. 
+It has three equivalent inputs (it doesn't matter which is used
+as normal input or carry), and two named outputs *sum* and *carry*.
+
+<!-- update quote( input, "", "''full_adder''" ) -->
 ~~~Python   
 def full_adder( a, b, c ):
     ab = half_adder( a, b )
