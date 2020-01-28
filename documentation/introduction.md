@@ -34,11 +34,11 @@ the inputs as parameters, and returns the output(s).
 Such a *circuit function* does not *calculate* the output,
 instead it *creates (and returns) a circuit* that can calculate the output.
 
-The basic gates (or, and, xor, not) are available 
-as overloads of the bitwise logic operators (&,|,^,~),
-operating on single wire.
+Circuit functions for the basic gates (or, and, xor, not) are available 
+as overloads of the bitwise logic operators (&,|,^,~).
+These functions operate on a single wire.
 
-In this function the created a circuit consists of two
+In this my_nand_gate function the created a circuit consists of two
 basic gates, an *and* and a *not*, and 
 the circuit calculates the *nand* function.
 
@@ -56,8 +56,10 @@ You can assign values to the inputs, and retrieve the result.
 <!-- update quote( input, "", "''my_nand_gate test''" ) -->
 ~~~Python
 my_nand_circuit = disimpy.circuit( my_nand_gate )
+
 my_nand_circuit.a, my_nand_circuit.b = 0, 1
 print( "nand( 0, 1 ) =>", c.value() )
+
 my_nand_circuit.a, my_nand_circuit.b = 1, 1
 print( "nand( 1, 1 ) =>", c.value() )
 ~~~
@@ -74,12 +76,17 @@ print( disimpy.truth_table( my_nand_gate ))
 A circuit function for a gate with multiple inputs 
 can get its inputs as a sequence. 
 
-In this example a nor circuit function that can handle any number of inputs 
-is realized by using reduce() to apply the or operator | to all elements 
-of the list, and applying the not operator ~ to the result.
+This my_nor_gate example circuit function is realized by using reduce() to apply 
+the or operator | to all elements of the list, 
+and applying the not operator ~ to the result.
+A lanmbda is used to create a function from the | operator.
 
-<!-- update quote( input, "", "''my_nor''" ) -->
+<!-- update quote( input, "", "''my_nor_gate''" ) -->
 ~~~Python
+def my_nor_gate( port ):
+    return ~ reduce( lambda a, b : a | b, port )
+def my_nor_gate( port ):
+    return ~ reduce( lambda a, b : a | b, port )
 ~~~	
    
 When such a function is used to create a circuit,
@@ -88,7 +95,14 @@ of inputs in the input port must be specified.
 The truth_table function can also be called with a circuit
 (instead of a circuit function).
 
+<!-- update quote( input, "", "''my_nor_gate test''" ) -->
 ~~~Python
+my_nor_circuit = disimpy.circuit( 
+    my_nor, 
+    inputs = 3
+)    
+print( disimpy.truth_table( my_nor ), inputs = 3 )
+print( disimpy.truth_table( my_nor_circuit ))
 my_nor_circuit = disimpy.circuit( 
     my_nor, 
     inputs = 3
@@ -103,6 +117,7 @@ The xor is available as a basic gate,
 but it could be defined as the classic xor-from-nands,
 using the my_nand_gate function.
 
+<!-- update quote( input, "", "''my_xor_gate 1''" ) -->
 ~~~Python
 def my_xor_gate( a, b ):
     return my_nand_gate( 
@@ -116,13 +131,14 @@ because the expression my_nand_gate( a, b ) is used twice.
 To prevent this, a local variable can be used 
 to re-use the output of a sub-circuit.
 
+<!-- update quote( input, "", "''my_xor_gate 2''" ) -->
 ~~~Python
 def my_xor_gate( a, b ):
     nand_ab = my_nand_gate( a, b )
     return my_nand_gate( 
        my_nand_gate( a, nand_ab )
        my_nand_gate( b, nand_ab )
-    )    
+    )        
 ~~~	
     
 It can be useful to combine a single wire
