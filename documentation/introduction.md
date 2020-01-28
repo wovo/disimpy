@@ -15,7 +15,7 @@ and simulation of digital circuits.
 
 <!-- update table_of_contents( input, 3 ) -->
 
-  - [Disimpy introduction](#toc-anchor-0)
+  - [Disimpy introduction](#toc-anchor-0) xx
 
     - [1. Combinatorial circuits](#toc-anchor-1)
 
