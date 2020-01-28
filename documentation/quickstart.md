@@ -1,23 +1,87 @@
+disimpy introduction
+
 disimpy is a Python library for the definition
 and simulation of digital circuits.
 
-The basic gates (or, and, xor, not) are available 
-as overloads of the bitwise logic operators (&,|,^,~),
-operating on single wire.
+*****************************************************************************
 
-combinatorial circuits
+<a name="toc-anchor-0"></a>
+
+# 1 Content
+
+<!-- update table_of_contents( input, 2 ) -->
+
+  - [1 Content](#toc-anchor-0)
+
+  - [2 Vocabulary](#toc-anchor-1)
+
+    - [2.1 cto](#toc-anchor-2)
+      [2.2 tag object](#toc-anchor-3)
+      [2.3 interface](#toc-anchor-4)
+      [2.4 initialization](#toc-anchor-5)
+      [2.5 value](#toc-anchor-6)
+      [2.6 item](#toc-anchor-7)
+      [2.7 stream](#toc-anchor-8)
+      [2.8 buffering](#toc-anchor-9)
+      [2.9 input, output](#toc-anchor-10)
+
+      - [2.9.1 input](#toc-anchor-11)
+
+      - [2.9.2 output](#toc-anchor-12)
+
+      - [2.9.3 direction](#toc-anchor-13)
+      [2.10 digital IO: gpio, gpi, gpo, gpoc](#toc-anchor-14)
+
+      - [2.10.1 gpio](#toc-anchor-15)
+
+      - [2.10.2 gpi](#toc-anchor-16)
+
+      - [2.10.3 gpo](#toc-anchor-17)
+
+      - [2.10.4 gpoc](#toc-anchor-18)
+      [2.11 Analog IO: adc, dac](#toc-anchor-19)
+      [2.12 duration](#toc-anchor-20)
+      [2.13 timing services](#toc-anchor-21)
+
+      - [2.13.1 waiting](#toc-anchor-22)
+
+      - [2.13.2 clocking](#toc-anchor-23)
+
+      - [2.13.3 tasking](#toc-anchor-24)
+      [2.14 xy](#toc-anchor-25)
+      [2.15 color](#toc-anchor-26)
+      [2.16 pixel window](#toc-anchor-27)
+      [2.17 character stream](#toc-anchor-28)
+      [2.18 monospaced character window](#toc-anchor-29)
+      [2.19 string](#toc-anchor-30)
+
+<!-- update end -->
+
+
+*****************************************************************************
+
+<a name="toc-anchor-1"></a>
+
+# 1 combinatorial circuits
 
 A circuit is created by a function that takes
 the inputs as parameters, and returns the output(s).
 Such a *circuit function* does not *calculate* the output,
 instead it creates a *circuit* that can calculate the output.
 
+The basic gates (or, and, xor, not) are available 
+as overloads of the bitwise logic operators (&,|,^,~),
+operating on single wire.
+
 In this example the circuit consists of two
 basic gates, an *and* and a *not*, and 
 the circuit calculates the *nand* function.
 
+<!-- update quote( input, "", "''box''" ) -->
+~~~Python
 def my_nand_gate( a, b ):
     return ~ ( a & b )
+~~~
 
 To test a circuit function, it must first be used to create a circuit.
 For the my_nand_gate function this creates a circuit that has two 
