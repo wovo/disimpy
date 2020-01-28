@@ -10,3 +10,6 @@ my_nand_circuit.a, my_nand_circuit.b = 0, 1
 print( "nand( 0, 1 ) =>", c.value() )
 my_nand_circuit.a, my_nand_circuit.b = 1, 1
 print( "nand( 1, 1 ) =>", c.value() )
+
+# update quote ''my_nand_gate truth table'' 1
+print( disimpy.truth_table( my_nand_gate ))

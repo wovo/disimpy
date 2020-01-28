@@ -33,6 +33,7 @@ def example( input, file_name, marker = "", quote = 0 ):
                if n != "":
                   try:
                      count = int( n )
+                     end = ""
                   except:
                      end = n
          elif selected:

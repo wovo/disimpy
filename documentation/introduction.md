@@ -13,15 +13,17 @@ and simulation of digital circuits.
 
   - [1 Content](#toc-anchor-0)
 
+  - [2 combinatorial circuits](#toc-anchor-1)
+
 <!-- update end -->
 
-<!-- update example_path( "sources/quickstart.py" ) -->
+<!-- update example_path( "sources/introduction.py" ) -->
 
 *****************************************************************************
 
 <a name="toc-anchor-1"></a>
 
-# 1 combinatorial circuits
+# 2 combinatorial circuits
 
 A circuit is created by a function that takes
 the inputs as parameters, and returns the output(s).
@@ -38,7 +40,7 @@ the circuit calculates the *nand* function.
 
 <!-- update quote( input, "", "''my_nand_gate''" ) -->
 ~~~Python
-def my_nand_gate( a, b ): xx
+def my_nand_gate( a, b ):
     return ~ ( a & b )
 ~~~
 
@@ -49,7 +51,7 @@ You can assign values to the inputs, and retrieve the result.
 
 <!-- update quote( input, "", "''my_nand_gate test''" ) -->
 ~~~Python
-my_nand_circuit = disimpy.circuit( my_nand_gate ) xx
+my_nand_circuit = disimpy.circuit( my_nand_gate )
 my_nand_circuit.a, my_nand_circuit.b = 0, 1
 print( "nand( 0, 1 ) =>", c.value() )
 my_nand_circuit.a, my_nand_circuit.b = 1, 1
@@ -59,7 +61,10 @@ print( "nand( 1, 1 ) =>", c.value() )
 The function truth_table() returns a table that shows the output(s)
 of a circuit function for all possible inputs.
 
+<!-- update quote( input, "", "''my_nand_gate truth table''" ) -->
+~~~Python
 print( disimpy.truth_table( my_nand_gate ))
+~~~
 <<>>
 
 A circuit function for a gate with multiple inputs 
@@ -69,9 +74,9 @@ In this example a nor circuit function that can handle any number of inputs
 is realized by using reduce() to apply the or operator | to all elements 
 of the list, and applying the not operator ~ to the result.
 
-import functools
-def my_nor( inputs ):
-    return ~ functools.reduce( lambda x, y : x | y, inputs )
+<!-- update quote( input, "", "''my_nor''" ) -->
+~~~Python
+~~~	
    
 When such a function is used to create a circuit,
 or to call truth_table, the number 
@@ -79,12 +84,14 @@ of inputs in the input port must be specified.
 The truth_table function can also be called with a circuit
 (instead of a circuit function).
 
+~~~Python
 my_nor_circuit = disimpy.circuit( 
     my_nor, 
     inputs = 3
 )    
 print( disimpy.truth_table( my_nor ), inputs = 3 )
 print( disimpy.truth_table( my_nor_circuit ))
+~~~
     
 A circuit function that can be used as a building block 
 for functions that create more complex circuits. 
@@ -92,51 +99,61 @@ The xor is available as a basic gate,
 but it could be defined as the classic xor-from-nands,
 using the my_nand_gate function.
 
+~~~Python
 def my_xor_gate( a, b ):
     return my_nand_gate( 
         my_nand_gate( a, my_nand_gate( a, b ) )
         my_nand_gate( b, my_nand_gate( a, b ) )
-    )      
+    )    
+~~~
 
 This uses five calls to my_nands_gate,
 because the expression my_nand_gate( a, b ) is used twice.
 To prevent this, a local variable can be used 
 to re-use the output of a sub-circuit.
 
+~~~Python
 def my_xor_gate( a, b ):
     nand_ab = my_nand_gate( a, b )
     return my_nand_gate( 
        my_nand_gate( a, nand_ab )
        my_nand_gate( b, nand_ab )
-    )     
+    )    
+~~~	
     
 It can be useful to combine a single wire
 with each of the wires in the sequence.
 This function applies a to each of the wires in b, 
 and returns the results as a sequence.
 
+~~~Python
 def my_nand_for_port_and_wire( a, b ):
     return [ ~ ( x & b ) for x in a ]    
+~~~
 
 A logic gate can also be applied to two same-length sequences of wires, 
 yielding a sequence of the xor's of pairs of wires 
 from the two input sequences.
 
+~~~Python
 def my_xor_for_two_ports( a, b ):
     return [ x ^ y for x, y in zip( a, b ) ]
-    
+~~~
+
 A circuit that has named outputs can be represented by an
 object with the outputs as attributes. 
 
+~~~Python
 def half_adder( a, b ):
    r = object()
    r.sum = a ^ b
    r.carry = a & b
    return r
+~~~
    
 The disimpy.bus function can be used to create such an object.
 
-   
+~~~Python   
 def full_adder( a, b, c ):
    ab = half_adder( a, b )
    abc = half_adder( ab.sum, c )
@@ -144,6 +161,7 @@ def full_adder( a, b, c ):
        sum = abc.sum, 
        carry = ab.carry | abc.carry 
    )    
+~~~
    
 built-in operators and functions   
        
@@ -182,6 +200,7 @@ to the feedback.
 
 This circuit function creates the classic two-nor set-reset latch.
 
+~~~Python
 def sr( s, r ):
    q, q_ = feedback( 2 )
    q_.connect( s, q )
@@ -192,6 +211,7 @@ x = circuit( sr() )
 sr.s = 0
 sr.r = 1
 sr.
+~~~
    
 A circuit like this that has state (memory) can't be
 characterized by a truth table. 
@@ -201,6 +221,7 @@ Instead
   
 
 
+~~~Python
 def and( a, b = None )
    if b != None:
       return a & b
@@ -208,12 +229,16 @@ def and( a, b = None )
       return reduce( lambda a, b : a & b, p )
    
 c = circuit( nand_of_port, p = port( 3 ) )   
+~~~
 
 a simple ALU
 - or 
 
+~~~Python
 def selective_or( n : port, m : port ):
+~~~
 
+~~~Python
 def xor( 
    a : , 
    b : 
@@ -224,7 +249,9 @@ def xor(
        return disimpy.port( [ a ^ b for a, b in zip( a, b ) ] )
     else:
        raise "operands not compatible"  
-       
+~~~
+   
+~~~Python   
 import collections
 def is_port( x )
    return 
@@ -240,6 +267,7 @@ def my_xor( a, b ):
        return [ a ^ b for a, b in zip( a, b ) ]
     else:
        raise "operands must be compatible"        
+~~~
 
 Library design sequence:
 - idea
@@ -247,6 +275,7 @@ Library design sequence:
 - try it to write code
 - document it
 
+~~~Python
 def ripple_adder( port1, port2, cin ):
    result = []
    for a, b in zip( port1, port2 ):
@@ -316,3 +345,4 @@ def register( clock, data ):
    return latch( 
       clock = ~ clock, 
       data = latch( clock, data ).q )
+~~~
