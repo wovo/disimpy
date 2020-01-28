@@ -148,7 +148,8 @@ def update( file_name ):
          
          if ( d > 1 ) and ( line != "Content" ):
             num = num_add( num, d - 1 )
-            line = num_str( num[:] ) + " " + line
+            line = num_str( num[:] ) + ". " + line
+            
          if d == toc_one_line:
             c = "-" if num[ -1 ] == 1 else " "
             nl = "\n" if num[ -1 ] == 1 else ""

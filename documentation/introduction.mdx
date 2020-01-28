@@ -13,13 +13,12 @@ and simulation of digital circuits.
 
 ## Content
 
-<!-- update table_of_contents( input, 3 ) -->
+<!-- update table_of_contents( input, 2 ) -->
 
-  - [Disimpy introduction](#toc-anchor-0)
+  - [disimpy introduction](#toc-anchor-0)
 
-    - [1. Combinatorial circuits](#toc-anchor-1)
-
-    - [2. Built-in operators and functions](#toc-anchor-2)
+    - [1 Combinatorial circuits](#toc-anchor-1)
+      [2 Built-in operators and functions](#toc-anchor-2)
 
 <!-- update end -->
 
@@ -29,7 +28,7 @@ and simulation of digital circuits.
 
 <a name="toc-anchor-1"></a>
 
-## 1. Combinatorial circuits
+## 1 Combinatorial circuits
 
 In dimspy a circuit is created by a function that takes the inputs
 of the circuit as parameters, and returns the output(s) of the circuit.
@@ -104,8 +103,8 @@ or truth_table function, with the same name as the port.
 
 <!-- update quote( input, "", "''my_nor_gate test 1''" ) -->
 ~~~Python
-my_nor_circuit = disimpy.circuit( my_nor_gate, inputs = 3 )    
-print( disimpy.truth_table( my_nor_gate, inputs = 3 ))
+my_nor_circuit = disimpy.circuit( my_nor, inputs = 3 )    
+print( disimpy.truth_table( my_nor, inputs = 3 ))
 ~~~
 
 The truth_table function can also be called with a circuit
@@ -195,7 +194,7 @@ def full_adder( a, b, c ):
 
 <a name="toc-anchor-2"></a>
 
-## 2. Built-in operators and functions
+## 2 Built-in operators and functions
        
 The disimpy built-in logical operators (&,|,^,~) 
 work for single wires only, and have only the 'true output' form 
