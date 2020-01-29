@@ -51,6 +51,10 @@ def my_nand_for_port_and_wire( a, b ):
 def my_xor_for_two_ports( a, b ):
     return [ x ^ y for x, y in zip( a, b ) ]
 
+# update quote ''equal'' 2
+def equal( a, b ):
+    return my_nor_gate( my_xor_for_two_ports( a, b ))
+
 # update quote ''half_adder'' 5
 def half_adder( a, b ):
     return disimpy.bus(
@@ -67,4 +71,16 @@ def full_adder( a, b, c ):
         carry = ab.carry | abc.carry 
     )    
 
+# update quote ''meta_gate'' 2
+def meta_gate( port1, port2, f ):
+    return [ f( x, y ) for x, y in zip( port1, port2 ) ]
+    
+# update quote ''ripple_adder''" 7
+def ripple_adder( port1, port2, cin ):
+   result = []
+   for a, b in zip( port1, port2 ):
+      stage = full_adder( a, b, cin )
+      result.append( stage.sum )
+      cin = stage.carry
+   return bus( sum = result, carry = cin ) 
 
