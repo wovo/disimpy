@@ -394,27 +394,35 @@ corresponding to the binary value of the input port is 1
 ~~~Python
 def decoder( v ):
    v_ = disimpy.not( v )
-   return [
-      is_equal( v, v_, i ) for i in range( 0, 2 ** v ) 
-   ] )
+   return [ is_equal( v, v_, i ) for i in range( 0, 2 ** v ) ]
 ~~~
 
 With a decoder() function in place a select() function that 
 passes the value on the selected input port through to the output is
-not complex: ...
+not complex.
+The b parameter must be a sequence of bits in which only
+the n'th bit is 1.
+The zip( *ports ) returns a sequence in which the 
+first element is a sequence of the first wires from all the ports,
+the second element is a sequence of the second wires from all the ports, etc.
+The *and( bits, p ) ands the bits from each port with the corresponding
+bit from b. The one bit from b that is true selects the value from that port,
+the values from the other ports are suppressed.
+The or combines the output of the ands.
 
 ~~~Python
-def select( bits, ports ):
+def select( b, ports ):
    return [ or( and( bits, p )) in zip( *ports ) ]
 ~~~
 
+~~~Python
 def alu( f, port1, port2, cin ):
    f_sum = ripple_adder( port1, port2, cin )
    f_and = 
    f_or
-   f_xor
+   f_xorb 
    return bus
-
+~~~
 
 
 - selector
