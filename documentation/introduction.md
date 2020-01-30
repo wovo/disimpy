@@ -52,7 +52,7 @@ In this my_nand_gate() function the created circuit consists of two
 basic gates, an *and* and a *not*, and 
 the created circuit calculates the *nand* function.
 
-<plaatje>
+![nand gate](circuits/introduction/my_nand_gate.png "nand gate")
 
 <!-- update quote( input, "", "''my_nand_gate''" ) -->
 ~~~Python
