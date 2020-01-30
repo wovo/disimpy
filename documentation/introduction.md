@@ -315,8 +315,10 @@ of 2 inputs, with true or inverted output. These functions are
 available as disimpy built-in functions, or can be realized via
 single gates and list comprehension.
 
-The next circuit 'meta' function calculated the bit-wise result of the
+The next circuit 'meta' function calculates the bit-wise result of the
 logical function f.
+
+![port port f](circuits/introduction/port_port_f.png "port port f")
 
 <!-- update quote( input, "", "''meta_gate''" ) -->
 ~~~Python
@@ -333,6 +335,8 @@ one carry input.
 Each bit pair from the inputs plus a carry is added using a full_adder().
 This must be done in an explicit loop (instead of by list comprehension)
 because the carry-in of each stage is het carry-out of the previous one.
+
+![ripple adder](circuits/introduction/ripple_adder.png "ripple adder")
 
 <!-- update quote( input, "", "''ripple_adder''" ) -->
 ~~~Python
