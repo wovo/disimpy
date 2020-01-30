@@ -158,8 +158,8 @@ as normal input or carry), and two named outputs *sum* and *carry*.
 <!-- update quote( input, "", "''full_adder''" ) -->
 ~~~Python   
 def full_adder( a, b, c ):
-    ab = half_adder( a, b )
-    abc = half_adder( ab.sum, c )
+    bc = half_adder( b, bc )
+    abc = half_adder( a, bc.sum )
     return disimpy.bus(
         sum = abc.sum, 
         carry = ab.carry | abc.carry 
@@ -181,7 +181,7 @@ and applying the not operator ~ to the result.
 Reduce requires a function (not an operator) as its first parameter, so 
 a lambda is used to create a function from the | operator.
 
-<plaatje>
+![port_nand](circuits/introduction/port_nand.png "port nand")
 
 <!-- update quote( input, "", "''my_nor_gate''" ) -->
 ~~~Python
@@ -201,12 +201,12 @@ my_nor_circuit = disimpy.circuit( my_nor_gate, inputs = 3 )
 print( disimpy.truth_table( my_nor_gate, inputs = 3 ))
 ~~~
 
-<output>
+<<print>>
 
 The truth_table function can also be called with a circuit
 (instead of a circuit function).
 
-<!-- update quote( input, "", "''my_nor_gate test 2''" ) -->
+<!-- update quote( input, "", "''my_nor_gate test''" ) -->
 ~~~Python
 print( disimpy.truth_table( my_nor_circuit ))
 ~~~
@@ -220,9 +220,9 @@ with each of the wires in a sequence.
 This my_nand_for_port_and_wire() function uses list comprehension 
 to apply *a* to each of the wires in *b*, and return the result as a list.
 
-<plaatje>
+![port wire nand](circuits/introduction/port_wirte_nand.png "port wire nand")
 
-<!-- update quote( input, "", "''my_nand_for_port_and_wire 2''" ) -->
+<!-- update quote( input, "", "''my_nand_for_port_and_wire''" ) -->
 ~~~Python
 def my_nand_for_port_and_wire( a, b ):
     return [ ~ ( x & b ) for x in a ]    
@@ -237,7 +237,7 @@ sequence of pairs of wires from the two
 (presumably same-length) sequences of wires, 
 and produces a list of the xor's of the pairs of wires.
 
-<plaatje>
+![port xnor](circuits/introduction/port_xnor.png "port xnor")
 
 <!-- update quote( input, "", "''my_xor_for_two_ports 2''" ) -->
 ~~~Python
@@ -246,8 +246,10 @@ def my_xor_for_two_ports( a, b ):
 ~~~
 
 The my_xor_for_two_ports() can be used to check whether the binary values
-in two ports are equal: this requires that the outputs are all 0,
-which is the nor function.
+in two ports are equal: this requires that the outputs are all zero,
+which is exactly the nor function.
+
+![port equal](circuits/introduction/port_equal.png "port equal")
 
 <!-- update quote( input, "", "''equal''" ) -->
 ~~~Python

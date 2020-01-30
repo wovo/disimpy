@@ -26,7 +26,7 @@ Wire Wire Line
 Wire Wire Line
 	3700 1150 4000 1150
 $Comp
-L dismpy:7404 U?
+L introduction-rescue:7404-dismpy U?
 U 1 1 5E336E16
 P 3150 1150
 F 0 "U?" H 3350 1450 50  0001 C CNN
@@ -37,7 +37,7 @@ F 3 "" H 3150 1150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L dismpy:7408 U?
+L introduction-rescue:7408-dismpy U?
 U 1 1 5E337286
 P 1800 1150
 F 0 "U?" H 1900 1450 50  0001 C CNN
@@ -48,7 +48,7 @@ F 3 "" H 1800 1150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L dismpy:7400 U?
+L introduction-rescue:7400-dismpy U?
 U 1 1 5E33AC9E
 P 3150 4250
 F 0 "U?" H 3400 4550 50  0001 C CNN
@@ -59,7 +59,7 @@ F 3 "" H 3150 4250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L dismpy:7400 U?
+L introduction-rescue:7400-dismpy U?
 U 1 1 5E33BC4E
 P 1750 4650
 F 0 "U?" H 2000 4950 50  0001 C CNN
@@ -70,7 +70,7 @@ F 3 "" H 1750 4650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L dismpy:7400 U?
+L introduction-rescue:7400-dismpy U?
 U 1 1 5E33D300
 P 3150 5000
 F 0 "U?" H 3400 5300 50  0001 C CNN
@@ -81,7 +81,7 @@ F 3 "" H 3150 5000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L dismpy:7400 U?
+L introduction-rescue:7400-dismpy U?
 U 1 1 5E33DBBB
 P 4500 4600
 F 0 "U?" H 4750 4900 50  0001 C CNN
@@ -141,7 +141,7 @@ Wire Wire Line
 Wire Wire Line
 	1100 4750 1100 5100
 $Comp
-L dismpy:7400 U?
+L introduction-rescue:7400-dismpy U?
 U 1 1 5E34CE0D
 P 3150 2600
 F 0 "U?" H 3400 2900 50  0001 C CNN
@@ -152,7 +152,7 @@ F 3 "" H 3150 2600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L dismpy:7400 U?
+L introduction-rescue:7400-dismpy U?
 U 1 1 5E34CE19
 P 3150 3350
 F 0 "U?" H 3400 3650 50  0001 C CNN
@@ -163,7 +163,7 @@ F 3 "" H 3150 3350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L dismpy:7400 U?
+L introduction-rescue:7400-dismpy U?
 U 1 1 5E34CE1F
 P 4500 2950
 F 0 "U?" H 4750 3250 50  0001 C CNN
@@ -194,7 +194,7 @@ Wire Wire Line
 Wire Wire Line
 	5300 2950 5000 2950
 $Comp
-L dismpy:7400 U?
+L introduction-rescue:7400-dismpy U?
 U 1 1 5E34CE13
 P 1900 3250
 F 0 "U?" H 2150 3550 50  0001 C CNN
@@ -205,7 +205,7 @@ F 3 "" H 1900 3250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L dismpy:7400 U?
+L introduction-rescue:7400-dismpy U?
 U 1 1 5E3581CD
 P 1900 2700
 F 0 "U?" H 2150 3000 50  0001 C CNN
@@ -267,4 +267,93 @@ Wire Wire Line
 	800  2900 1100 2900
 Text GLabel 2450 4750 2    50   Input ~ 0
 nand_ab
+$Comp
+L disimpy:7408 U?
+U 1 1 5E32BC6D
+P 7050 2000
+F 0 "U?" H 7150 2300 50  0001 C CNN
+F 1 "7408" H 7200 1650 50  0001 C CNN
+F 2 "" H 7050 2000 50  0001 C CNN
+F 3 "" H 7050 2000 50  0001 C CNN
+	1    7050 2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L disimpy:7486 U?
+U 1 1 5E32C56B
+P 7000 1300
+F 0 "U?" H 7100 1550 50  0001 C CNN
+F 1 "7486" H 7150 1000 50  0001 C CNN
+F 2 "" H 7000 1300 50  0001 C CNN
+F 3 "" H 7000 1300 50  0001 C CNN
+	1    7000 1300
+	1    0    0    -1  
+$EndComp
+Text GLabel 5750 1550 0    50   Input ~ 0
+a
+Text GLabel 5750 1750 0    50   Input ~ 0
+b
+Text GLabel 7800 1300 2    50   Input ~ 0
+output
+Wire Wire Line
+	7800 1300 7500 1300
+Text GLabel 7800 2000 2    50   Input ~ 0
+output
+Wire Wire Line
+	7600 2000 7800 2000
+Wire Wire Line
+	6500 1200 6200 1200
+Wire Wire Line
+	6200 1900 6500 1900
+Wire Wire Line
+	6200 1200 6200 1550
+Wire Wire Line
+	6500 1400 6350 1400
+Wire Wire Line
+	6350 1400 6350 1750
+Wire Wire Line
+	6350 2100 6500 2100
+Wire Wire Line
+	5750 1550 6200 1550
+Connection ~ 6200 1550
+Wire Wire Line
+	6200 1550 6200 1900
+Wire Wire Line
+	5750 1750 6350 1750
+Connection ~ 6350 1750
+Wire Wire Line
+	6350 1750 6350 2100
+$Comp
+L disimpy:half_adder U?
+U 1 1 5E34591D
+P 9500 1600
+F 0 "U?" H 9750 1900 50  0001 C CNN
+F 1 "half_adder" H 9700 1300 50  0001 C CNN
+F 2 "" H 9500 1600 50  0001 C CNN
+F 3 "" H 9500 1600 50  0001 C CNN
+	1    9500 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L disimpy:half_adder U?
+U 1 1 5E3465F5
+P 7500 3650
+F 0 "U?" H 7750 3950 50  0001 C CNN
+F 1 "half_adder" H 7700 3350 50  0001 C CNN
+F 2 "" H 7500 3650 50  0001 C CNN
+F 3 "" H 7500 3650 50  0001 C CNN
+	1    7500 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L disimpy:half_adder U?
+U 1 1 5E346EA0
+P 8950 3850
+F 0 "U?" H 9200 4150 50  0001 C CNN
+F 1 "half_adder" H 9150 3550 50  0001 C CNN
+F 2 "" H 8950 3850 50  0001 C CNN
+F 3 "" H 8950 3850 50  0001 C CNN
+	1    8950 3850
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
