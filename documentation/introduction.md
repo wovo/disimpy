@@ -374,7 +374,7 @@ def bits( v, n ):
 # naive version
 def is_equal( port, v ):
    return nor( [ b ^ in zip( port, bits( v, len( port ) ) ] )
-~~~~
+~~~
 
 The naive is_equal() implementation can be improved by supplying
 both the bus and the bitwise inverted bus.
