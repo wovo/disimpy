@@ -43,11 +43,11 @@ def my_xor_gate( a, b ):
        my_nand_gate( b, nand_ab )
     )        
     
-# update quote ''my_nand_for_port_and_wire 2'' 2
+# update quote ''my_nand_for_port_and_wire'' 2
 def my_nand_for_port_and_wire( a, b ):
-    return [ ~ ( x & b ) for x in a ]    
+    return [ ~ ( x & b ) for x in a ]         s
 
-# update quote ''my_xor_for_two_ports 2'' 2
+# update quote ''my_xor_for_two_ports'' 2
 def my_xor_for_two_ports( a, b ):
     return [ x ^ y for x, y in zip( a, b ) ]
 

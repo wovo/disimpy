@@ -206,8 +206,9 @@ print( disimpy.truth_table( my_nor_gate, inputs = 3 ))
 The truth_table function can also be called with a circuit
 (instead of a circuit function).
 
-<!-- update quote( input, "", "''my_nor_gate test''" ) -->
+<!-- update quote( input, "", "''my_nor_gate test 2''" ) -->
 ~~~Python
+print( disimpy.truth_table( my_nor_circuit ))
 ~~~
     
 A circuit function can be used as a building block 
@@ -222,6 +223,8 @@ to apply *a* to each of the wires in *b*, and return the result as a list.
 
 <!-- update quote( input, "", "''my_nand_for_port_and_wire''" ) -->
 ~~~Python
+def my_nand_for_port_and_wire( a, b ):
+    return [ ~ ( x & b ) for x in a ]         s
 ~~~
 
 Another usefull pattern is to apply a logic gate to two 
@@ -235,7 +238,7 @@ and produces a list of the xor's of the pairs of wires.
 
 ![port xnor](circuits/introduction/port_xnor.png "port xnor")
 
-<!-- update quote( input, "", "''my_xor_for_two_ports 2''" ) -->
+<!-- update quote( input, "", "''my_xor_for_two_ports''" ) -->
 ~~~Python
 def my_xor_for_two_ports( a, b ):
     return [ x ^ y for x, y in zip( a, b ) ]
