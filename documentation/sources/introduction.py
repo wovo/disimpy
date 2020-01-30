@@ -75,7 +75,7 @@ def full_adder( a, b, c ):
 def meta_gate( port1, port2, f ):
     return [ f( x, y ) for x, y in zip( port1, port2 ) ]
     
-# update quote ''ripple_adder''" 7
+# update quote ''ripple_adder'' 7
 def ripple_adder( port1, port2, cin ):
    result = []
    for a, b in zip( port1, port2 ):
@@ -83,4 +83,7 @@ def ripple_adder( port1, port2, cin ):
       result.append( stage.sum )
       cin = stage.carry
    return bus( sum = result, carry = cin ) 
+   
+   
+   
 

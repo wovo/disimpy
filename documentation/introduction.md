@@ -350,7 +350,6 @@ def ripple_adder( port1, port2, cin ):
       result.append( stage.sum )
       cin = stage.carry
    return bus( sum = result, carry = cin ) 
-
 ~~~   
 
 This implementation of addition is called a ripple adder because the
