@@ -15,8 +15,6 @@ and simulation of digital circuits.
 
 <!-- update table_of_contents( input, 3 ) -->
 
-  - [Disimpy introduction](#toc-anchor-0)
-
     - [1. Simple combinatorial circuits](#toc-anchor-1)
 
     - [2. Named inputs and outputs: busses](#toc-anchor-2)
