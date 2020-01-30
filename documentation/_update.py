@@ -79,7 +79,7 @@ def table_of_contents( input, n = -1 ):
    return [ "%%TOC%%\n", line ]
    
 def list_entry( n ):
-   return " " * ( 2 * n ) + "- " 
+   return " " * ( 2 * n - 1 ) + "- " 
    
 def num_add( num, n ):
    while len( num ) > n:
@@ -97,7 +97,7 @@ def num_str( num ):
       if result != "":
          result += "."
       result += str( n )
-   return result	  
+   return result
 
 def update( file_name ):
    print( "updating %s" % file_name )
@@ -154,7 +154,7 @@ def update( file_name ):
             c = "-" if num[ -1 ] == 1 else " "
             nl = "\n" if num[ -1 ] == 1 else ""
             toc.append( 
-              nl + list_entry( d - 2 ).replace( "-", c ) 
+              nl + list_entry( d ).replace( "-", c ) 
               + "[%s](#toc-anchor-%d)\n" % ( line , n ))
          else:
             if line != "Content":
