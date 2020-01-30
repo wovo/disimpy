@@ -15,15 +15,15 @@ and simulation of digital circuits.
 
 <!-- update table_of_contents( input, 3 ) -->
 
-   - [1. Simple combinatorial circuits](#toc-anchor-1)
+    - [1. Simple combinatorial circuits](#toc-anchor-1)
 
-   - [2. Named inputs and outputs: busses](#toc-anchor-2)
+    - [2. Named inputs and outputs: busses](#toc-anchor-2)
 
-   - [3. Multi-wire inputs and outputs](#toc-anchor-3)
+    - [3. Multi-wire inputs and outputs](#toc-anchor-3)
 
-   - [4. Built-in logic operators and functions](#toc-anchor-4)
+    - [4. Built-in logic operators and functions](#toc-anchor-4)
 
-   - [5. Building an ALU](#toc-anchor-5)
+    - [5. Building an ALU](#toc-anchor-5)
 
 <!-- update end -->
 

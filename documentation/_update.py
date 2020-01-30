@@ -154,7 +154,7 @@ def update( file_name ):
             c = "-" if num[ -1 ] == 1 else " "
             nl = "\n" if num[ -1 ] == 1 else ""
             toc.append( 
-              nl + list_entry( d - 1 ).replace( "-", c ) 
+              nl + list_entry( d - 2 ).replace( "-", c ) 
               + "[%s](#toc-anchor-%d)\n" % ( line , n ))
          else:
             if line != "Content":
