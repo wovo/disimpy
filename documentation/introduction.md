@@ -95,7 +95,7 @@ The xor is available as a basic gate,
 but it could be defined as the classic xor-from-nands,
 using the my_nand_gate() circuit function as building block.
 
-<plaatje>
+![5 nand xor gate](circuits/introduction/my_xor_gate_1.png "5 nand xor gate")
 
 <!-- update quote( input, "", "''my_xor_gate 1''" ) -->
 ~~~Python
@@ -111,7 +111,7 @@ because the expression my_nand_gate( a, b ) is used twice.
 To prevent this, a local variable can be used 
 to re-use the output of the sub-circuit my_nand_gate( a, b ).
 
-<plaatje>
+![4 nand xor gate](circuits/introduction/my_xor_gate_2.png "4 nand xor gate")
 
 <!-- update quote( input, "", "''my_xor_gate 2''" ) -->
 ~~~Python
