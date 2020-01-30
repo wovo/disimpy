@@ -106,7 +106,7 @@ def my_xor_gate( a, b ):
     )    
 ~~~
 
-This uses five calls to my_nands_gate(),
+This is correct, but it uses five calls to my_nands_gate(),
 because the expression my_nand_gate( a, b ) is used twice.
 To prevent this, a local variable can be used 
 to re-use the output of the sub-circuit my_nand_gate( a, b ).
@@ -137,7 +137,8 @@ The outputs are available as attributes of the bus.
 This half-adder() circuit function has two input wires, 
 and two named outputs *sum* and *carry*.
 
-<plaatje>
+![half adder](circuits/introduction/half_adder.png "half adder")
+
 
 <!-- update quote( input, "", "''half_adder''" ) -->
 ~~~Python
@@ -152,7 +153,7 @@ This full_adder() circuit uses two half-adders to create a full adder.
 It has three equivalent inputs (it doesn't matter which is used
 as normal input or carry), and two named outputs *sum* and *carry*.
 
-<plaatje>
+![full adder](circuits/introduction/full_adder.png "full adder")
 
 <!-- update quote( input, "", "''full_adder''" ) -->
 ~~~Python   

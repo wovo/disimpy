@@ -1,11 +1,93 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# dismpy_7400
+# disimpy_7408
 #
-DEF dismpy_7400 U 0 30 Y Y 4 F N
+DEF disimpy_7408 U 0 30 Y Y 4 F N
+F0 "U" 100 300 50 H I C CNN
+F1 "disimpy_7408" 150 -350 50 H I C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+T 0 0 0 100 0 0 1 & Normal 0 C C
+S -250 200 250 -250 0 1 0 N
+X ~ ~ -550 -100 300 R 50 50 1 1 I
+X ~ ~ -550 100 300 R 50 50 1 1 I
+X ~ ~ 550 0 300 L 50 50 1 1 O
+X ~ 4 -550 100 300 R 50 50 2 1 I
+X ~ 5 -550 -100 300 R 50 50 2 1 I
+X ~ 6 550 0 300 L 50 50 2 1 O
+X ~ 10 -550 -100 300 R 50 50 3 1 I
+X ~ 8 550 0 300 L 50 50 3 1 O
+X ~ 9 -550 100 300 R 50 50 3 1 I
+X ~ 11 550 0 300 L 50 50 4 1 O
+X ~ 12 -550 100 300 R 50 50 4 1 I
+X ~ 13 -550 -100 300 R 50 50 4 1 I
+ENDDRAW
+ENDDEF
+#
+# disimpy_7486
+#
+DEF disimpy_7486 U 0 30 Y Y 4 F N
+F0 "U" 100 250 50 H I C CNN
+F1 "disimpy_7486" 150 -300 50 H I C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+T 0 20 0 100 0 0 1 =1 Normal 0 C C
+S -200 200 200 -250 0 1 0 N
+X ~ ~ -500 -100 300 R 50 50 1 1 I
+X ~ ~ -500 100 300 R 50 50 1 1 I
+X ~ ~ 500 0 300 L 50 50 1 1 O
+X ~ 4 -500 100 300 R 50 50 2 1 I
+X ~ 5 -500 -100 300 R 50 50 2 1 I
+X ~ 6 500 0 300 L 50 50 2 1 O
+X ~ 10 -500 -100 300 R 50 50 3 1 I
+X ~ 8 500 0 300 L 50 50 3 1 O
+X ~ 9 -500 100 300 R 50 50 3 1 I
+X ~ 11 500 0 300 L 50 50 4 1 O
+X ~ 12 -500 100 300 R 50 50 4 1 I
+X ~ 13 -500 -100 300 R 50 50 4 1 I
+ENDDRAW
+ENDDEF
+#
+# disimpy_half_adder
+#
+DEF disimpy_half_adder U 0 30 Y Y 4 F N
 F0 "U" 250 300 50 H I C CNN
-F1 "dismpy_7400" 200 -300 50 H I C CNN
+F1 "disimpy_half_adder" 200 -300 50 H I C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+T 0 50 -100 59 0 0 0 carry Normal 0 C C
+T 0 -150 100 59 0 1 1 a Normal 0 C C
+T 0 -150 -100 59 0 1 1 b Normal 0 C C
+T 0 50 100 59 0 1 1 sum Normal 0 C C
+S -200 250 200 -250 0 1 0 N
+X ~ ~ -500 -100 300 R 50 50 1 1 I
+X ~ ~ -500 100 300 R 50 50 1 1 I
+X ~ ~ 500 -100 300 L 50 50 1 1 O
+X ~ ~ 500 100 300 L 50 50 1 1 O
+X ~ 4 -500 100 300 R 50 50 2 1 I
+X ~ 5 -500 -100 300 R 50 50 2 1 I
+X ~ 6 500 -100 300 L 50 50 2 1 O
+X ~ 6 500 100 300 L 50 50 2 1 O
+X ~ 10 -500 -100 300 R 50 50 3 1 I
+X ~ 8 500 -100 300 L 50 50 3 1 O
+X ~ 8 500 100 300 L 50 50 3 1 O
+X ~ 9 -500 100 300 R 50 50 3 1 I
+X ~ 11 500 -100 300 L 50 50 4 1 O
+X ~ 11 500 100 300 L 50 50 4 1 O
+X ~ 12 -500 100 300 R 50 50 4 1 I
+X ~ 13 -500 -100 300 R 50 50 4 1 I
+ENDDRAW
+ENDDEF
+#
+# introduction-rescue_7400-dismpy
+#
+DEF introduction-rescue_7400-dismpy U 0 30 Y Y 4 F N
+F0 "U" 250 300 50 H I C CNN
+F1 "introduction-rescue_7400-dismpy" 200 -300 50 H I C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -26,11 +108,11 @@ X ~ 13 -500 -100 300 R 50 50 4 1 I
 ENDDRAW
 ENDDEF
 #
-# dismpy_7404
+# introduction-rescue_7404-dismpy
 #
-DEF dismpy_7404 U 0 30 Y Y 6 F N
+DEF introduction-rescue_7404-dismpy U 0 30 Y Y 6 F N
 F0 "U" 200 300 50 H I C CNN
-F1 "dismpy_7404" 150 -350 50 H I C CNN
+F1 "introduction-rescue_7404-dismpy" 150 -350 50 H I C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -51,11 +133,11 @@ X ~ 13 -550 0 300 R 50 50 6 1 I
 ENDDRAW
 ENDDEF
 #
-# dismpy_7408
+# introduction-rescue_7408-dismpy
 #
-DEF dismpy_7408 U 0 30 Y Y 4 F N
+DEF introduction-rescue_7408-dismpy U 0 30 Y Y 4 F N
 F0 "U" 100 300 50 H I C CNN
-F1 "dismpy_7408" 150 -350 50 H I C CNN
+F1 "introduction-rescue_7408-dismpy" 150 -350 50 H I C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW

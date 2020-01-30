@@ -1,4 +1,5 @@
 (sym_lib_table
   (lib (name disimpy)(type Legacy)(uri C:/ti-software/disimpy/documentation/circuits/disimpy.lib)(options "")(descr ""))
   (lib (name dismpy)(type Legacy)(uri C:/ti-software/disimpy/documentation/circuits/dismpy.lib)(options "")(descr ""))
+  (lib (name introduction-rescue)(type Legacy)(uri ${KIPRJMOD}/introduction-rescue.lib)(options "")(descr ""))
 )
