@@ -49,12 +49,12 @@ $EndComp
 $Comp
 L disimpy:port_port_equal U?
 U 1 1 5E368796
-P 3900 3500
-F 0 "U?" H 4100 3800 50  0001 C CNN
-F 1 "port_port_equal" H 6650 3050 50  0001 C CNN
-F 2 "" H 3750 3750 50  0001 C CNN
-F 3 "" H 3750 3750 50  0001 C CNN
-	1    3900 3500
+P 3000 3550
+F 0 "U?" H 3200 3850 50  0001 C CNN
+F 1 "port_port_equal" H 5750 3100 50  0001 C CNN
+F 2 "" H 2850 3800 50  0001 C CNN
+F 3 "" H 2850 3800 50  0001 C CNN
+	1    3000 3550
 	1    0    0    -1  
 $EndComp
 $Comp

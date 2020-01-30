@@ -158,8 +158,8 @@ as normal input or carry), and two named outputs *sum* and *carry*.
 <!-- update quote( input, "", "''full_adder''" ) -->
 ~~~Python   
 def full_adder( a, b, c ):
-    bc = half_adder( b, bc )
-    abc = half_adder( a, bc.sum )
+    ab = half_adder( a, b )
+    abc = half_adder( ab.sum, c )
     return disimpy.bus(
         sum = abc.sum, 
         carry = ab.carry | abc.carry 
@@ -181,7 +181,7 @@ and applying the not operator ~ to the result.
 Reduce requires a function (not an operator) as its first parameter, so 
 a lambda is used to create a function from the | operator.
 
-![port_nand](circuits/introduction/port_nand.png "port nand")
+![port nor](circuits/introduction/port_nor.png "port nor")
 
 <!-- update quote( input, "", "''my_nor_gate''" ) -->
 ~~~Python
@@ -208,24 +208,20 @@ The truth_table function can also be called with a circuit
 
 <!-- update quote( input, "", "''my_nor_gate test''" ) -->
 ~~~Python
-print( disimpy.truth_table( my_nor_circuit ))
 ~~~
     
 A circuit function can be used as a building block 
 for functions that create more complex circuits. 
-
 A usefull pattern is to combine a single wire
 with each of the wires in a sequence.
 
 This my_nand_for_port_and_wire() function uses list comprehension 
 to apply *a* to each of the wires in *b*, and return the result as a list.
 
-![port wire nand](circuits/introduction/port_wirte_nand.png "port wire nand")
+![port wire nand](circuits/introduction/port_wire_nand.png "port wire nand")
 
 <!-- update quote( input, "", "''my_nand_for_port_and_wire''" ) -->
 ~~~Python
-def my_nand_for_port_and_wire( a, b ):
-    return [ ~ ( x & b ) for x in a ]    
 ~~~
 
 Another usefull pattern is to apply a logic gate to two 
