@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name disimpy)(type Legacy)(uri C:/ti-software/disimpy/documentation/circuits/disimpy.lib)(options "")(descr ""))
+  (lib (name dismpy)(type Legacy)(uri C:/ti-software/disimpy/documentation/circuits/dismpy.lib)(options "")(descr ""))
 )
